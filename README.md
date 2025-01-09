@@ -7,7 +7,7 @@
 
 *Location: Sofia, Bulgaria
 
-*Date: 10.06.2024
+*Date: 30.12.2024
 
 ## Table of Contents
 
