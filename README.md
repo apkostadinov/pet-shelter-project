@@ -3,7 +3,7 @@
 
 *Author: Aleksandar Kostadinov
 
-*Github: Robbin-Banx
+*GitHub: apkostadinov
 
 *Location: Sofia, Bulgaria
 
