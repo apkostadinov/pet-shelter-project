@@ -187,13 +187,13 @@ def create_entry():
     while True:
         try:
             patient = Patient()
-            break
         except ValueError as er:
             print(er)
             if input("Do you want to try again? Type 'Y' or 'N'!").lower() == "y":
                 continue
             else:
                 break
+        break
 
     while True:
         print(patient)
@@ -212,10 +212,10 @@ def create_entry():
             continue
 
 
-def search_base(search_condition):
+def search_base(search_condition, silent=False):
     found_items = []
 
-    # Define your search criteria (e.g., column1 = "value1")
+    # Define your search column
     search_column = "name"
 
     with sqlite3.connect(database) as conn:
@@ -227,15 +227,16 @@ def search_base(search_condition):
         rows = cursor.fetchall()
 
         for i in rows:
-            found_items.append(
-                Patient(species=i[1], gender=i[2], name=i[3], age=i[4], id=i[0])
-            )
+            patient_i = Patient(id=i[0], species=i[1], gender=i[2], name=i[3], age=i[4])
+            found_items.append(patient_i)
+
 
     # Return search result
     if len(found_items) == 0:
         return None
     elif len(found_items) == 1:
-        print("Search Successful")
+        if not silent:
+            print("Search Successful")
         return found_items[0]
     elif len(found_items) > 1:
         return multiple_search_results(found_items)
@@ -243,27 +244,29 @@ def search_base(search_condition):
 
 def multiple_search_results(found_items: list):
     # Handle cases where there are multiple found items from the search function
-    numbering: int = 1
-
+    user_input = None
     # Create indexing for found results
     for i in found_items:
-        print(f'{numbering}, "|", {i}')
-        numbering += 1
+        print(f'id: {i.id}', "|", f'{i}')
 
     while True:
         # Ask user which match is the correct one
         try:
             user_input = int(
                 input(
-                    "Which patient is the one you are looking for? Type the index number: "
+                    "Which patient is the one you are looking for? Type the id number: "
                 )
             )
-            break
         except ValueError:
             print("Please input an integer")
 
-    user_input = user_input - 1
-    return found_items[user_input]
+        for i in found_items:
+            if i.id == user_input:
+                return i
+            else:
+                continue
+        else:
+            print("Value not found.")
 
 
 def edit_entry(patient):
@@ -300,8 +303,13 @@ def edit_entry(patient):
 
 
 def remove_entry(patient, silent: bool = False):
-    delete_column = "id"  # The column used to find the specific row
-    delete_value = patient.id  # The value to match for deletion
+    if patient.id:
+        delete_column = "id"  # The column used to find the specific row
+        delete_value = patient.id  # The value to match for deletion
+    elif patient.name:
+        delete_column = "name"  # The column used to find the specific row
+        delete_value = patient.name  # The value to match for deletion
+
 
     with sqlite3.connect(database) as conn:
         cursor = conn.cursor()
@@ -313,7 +321,6 @@ def remove_entry(patient, silent: bool = False):
 
     if not silent:
         print("Patient removed")
-
 
 if __name__ == "__main__":
     main()
