@@ -109,14 +109,11 @@ class Patient:
 
     @age.setter
     def age(self, value):
-        if type(value) == int():
+        try:
+            value = int(value)
             self._age = value
-        else:
-            raise ValueError("Age must be a number")
-        except Exception as ex:
-            raise ex(f'An error has occured: {ex}')
-        finally:
-            self._age = value
+        except Exception:
+            raise ValueError("Age must be a valid number")
 
 
     def edit(self, silent: bool = False):

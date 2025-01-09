@@ -35,8 +35,7 @@ def test_Patient_ValueError_for_name():
 
 
 def test_Patient_ValueError_for_age():
-
-    with pytest.raises(ValueError, match="Age must be a number"):
+    with pytest.raises(ValueError, match="Age must be a valid number"):
         Patient("dog", "male", "Harry", "Harry")
 
 def test_Patient_str():
