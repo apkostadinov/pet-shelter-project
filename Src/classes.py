@@ -109,7 +109,7 @@ class Patient:
 
     @age.setter
     def age(self, value):
-        if int(value):
+        if type(value) == int():
             self._age = value
         else:
             raise ValueError("Age must be a number")
