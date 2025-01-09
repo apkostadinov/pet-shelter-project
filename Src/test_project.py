@@ -21,12 +21,12 @@ def run_around_tests():
 def test_Patient_ValueError_for_species():
 
     with pytest.raises(ValueError, match="Patient can be a dog or a cat."):
-        Patient("male", "male", "Harry", "4")
+        Patient("male", "male", "Harry", 4)
 
 def test_Patient_ValueError_for_gender():
 
     with pytest.raises(ValueError, match="Patient must be male or female."):
-        Patient("dog", "dog", "Harry", "4")
+        Patient("dog", "dog", "Harry", 4)
 
 def test_Patient_ValueError_for_name():
 
@@ -43,23 +43,23 @@ def test_Patient_str():
     species = "Dog"
     gender = "male"
     name = "Harry"
-    age = "4"
+    age = 4
     test_patient = Patient(species, gender, name, age)
     assert str(test_patient) == f"Patient is a {gender} {species}. Patient's name is {name} and is {age} years old."
 
 def test_Patient_eq_False():
-    test_patient_1=Patient("dog", "male", "Harry", "4")
-    test_patient_2=Patient("cat", "male", "Ronald", "4")
+    test_patient_1=Patient("dog", "male", "Harry", 4)
+    test_patient_2=Patient("cat", "male", "Ronald", 4)
     assert (test_patient_1 == test_patient_2) == False
 
 def test_Patient_eq_True():
-    test_patient_1=Patient("dog", "male", "Harry", "4")
-    test_patient_2=Patient("dog", "male", "Harry", "4")
+    test_patient_1=Patient("dog", "male", "Harry", 4)
+    test_patient_2=Patient("dog", "male", "Harry", 4)
     assert test_patient_1 == test_patient_2
 
 
 def test_write_to_database():
-    test_patient_1 = Patient("cat", "male", "Ronald", "4")
+    test_patient_1 = Patient("cat", "male", "Ronald", 4)
     write_to_database(test_patient_1, silent=True)
     subjects = []
 
@@ -83,18 +83,18 @@ def test_write_to_database():
 
 
 def test_search_database():
-    test_patient_1 = Patient("cat", "male", "Christian", "4")
+    test_patient_1 = Patient("cat", "male", "Christian", 4)
     write_to_database(test_patient_1, silent=True)
     result = search_base('Christian', silent=True)
     remove_entry(test_patient_1, silent=True)
     assert result == test_patient_1
 
 def test_remove_entry():
-    test_patient_1 = Patient("cat", "male", "Evan", "4")
+    test_patient_1 = Patient("cat", "male", "Evan", 4)
     write_to_database(test_patient_1, silent=True)
     remove_entry(test_patient_1, silent=True)
 
-    assert search_base(test_patient_1.name) == None
+    assert search_base(test_patient_1.name) is None
 
 
 def clean_up():
