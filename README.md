@@ -20,6 +20,8 @@
 The project's main goal is to help create a registry for a pet shelter.
 To achieve this the program creates a database file named "database.db" if one does not exist in the directory already. The name of the database can be changed on line 7 before starting the program.
 
+#### Usage:
+
 ##### Interactive Mode
 Upon starting the program the user is prompted for input. The user can:
 * Type "read" to read the database, which will output the table for patients from the database file.
@@ -36,7 +38,9 @@ Upon starting the program the user is prompted for input. The user can:
 #### Operation
 The program operates by creating a patient object using the Patient class which contains the species, gender, name and age of the pet. Then depending on the context the object can be written to the database or be edited the as a class instance by user prompts.
 
-#### Patient Class
+#### Components
+
+##### Patient Class
 
 The `Patient` class is used to represent the pets in the shelter. Each instance of the `Patient` class includes attributes for the species, gender, name, and age of the pet. The class provides methods for:
 
@@ -55,35 +59,35 @@ The `Patient` class is stored in the `classes.py` file.
     - `__iter__`: Returns a dictionary where the keys are `"species"`, `"gender"`, `"name"`, and `"age"`, and the values are the corresponding strings or integers.
     - `__eq__`: Supports comparison of different instances.
 
-#### Creating Objects
+##### Creating Objects
 
 - **Interactive Mode:** Call the `Patient()` function. The user is prompted to input the necessary data for creating the object.
 - **Search Mode:** When a search conducted and a result is found, the search function creates an object by calling `Patient("species", "gender", "name", "age", "id")` and returns the created object.
 
-#### Main Function
+##### Main Function
 
 The `main` function manages the primary workflow of the program. It ensures that the database file exists and handles user inputs through both command-line arguments and interactive prompts. The function supports reading the database, searching for and modifying entries, adding new patients to the database and editting existing entries.
 
-#### Write Function
+##### Write Function
 
 The `write_to_database` function takes a `Patient` class object and prompts the user to review the data. If confirmed, the patient data is written to the database. It provides an option to exit the program or retry the process. 
 
-#### Create Entry
+##### Create Entry
 
 The `create_entry` function is used to initialize an instance object of the `Patient` class. It then asks for a confirmation from the user to write the entry to the database, edit the entry before it's written or exit the program.
 
-#### Search Base Function
+##### Search Base Function
 
 The `search_base` function searches the database for a patient by name. It returns the matching patient object if found, allowing further actions like editing or removal. The function handles cases with no results, single results, or multiple results.
 
-#### Multiple Search Results Function
+##### Multiple Search Results Function
 
 The `multiple_search_results` function is only called by the `search_base` function in scenarios where multiple patients match the search criteria. It prompts the user to select the correct patient from the list of found items and returns the chosen patient object for further actions.
 
-#### Edit Entry Function
+##### Edit Entry Function
 
 The `edit_entry` function allows editing of an existing patient's details. It takes an instance of the `Patient` class as argument then uses a class method of the `Patient` class to update the required information. The updated information is then passed to the database.
 
-#### Remove Entry Function
+##### Remove Entry Function
 
 The `remove_entry` function removes a specified patient from the database.  It takes an instance of the `Patient` class as argument it then uses the `patient.id` attribute to delete the entry from the patient table of the database.
