@@ -5,7 +5,6 @@ class Patient:
     """"
     A class used to represent types of patients.
 
-
     """
 
     def __init__(
@@ -17,7 +16,7 @@ class Patient:
             self.species = input("What is the patient's species? ").capitalize()
 
         if gender != None:
-            self.gender = gender
+            self.gender = gender.lower()
         else:
             self.gender = input("What is the patient male or female? ").lower()
 

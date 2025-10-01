@@ -158,7 +158,10 @@ def main():
 
 
 def write_to_database(patient: Patient, silent: bool = False) -> None:
-    # Replace these with the actual column names and values
+    """
+    A function to write the an object of the Patient class to the database.
+    """
+
     new_entry = {
         "species": patient.species,
         "gender": patient.gender,
@@ -183,7 +186,9 @@ def write_to_database(patient: Patient, silent: bool = False) -> None:
 
 
 def create_entry():
-
+    """
+    A function to create instances of the Patient class
+    """
     while True:
         try:
             patient = Patient()
@@ -243,7 +248,9 @@ def search_base(search_condition, silent=False):
 
 
 def multiple_search_results(found_items: list):
-    # Handle cases where there are multiple found items from the search function
+    """
+    Handle cases where there are multiple found items from the search function
+    """
     user_input = None
     # Create indexing for found results
     for i in found_items:
@@ -270,7 +277,9 @@ def multiple_search_results(found_items: list):
 
 
 def edit_entry(patient):
-
+    """
+    A function to edit rows in the database by id or name.
+    """
     new_patient = patient.edit()
 
     # Define the criteria for identifying the row to update
@@ -279,7 +288,7 @@ def edit_entry(patient):
 
     # Define the new values for the columns to update
     updated_data = {
-        "species": new_patient.species,  # Replace with the actual column names and new values
+        "species": new_patient.species,
         "gender": new_patient.gender,
         "name": new_patient.name,
         "age": new_patient.age,
@@ -303,6 +312,9 @@ def edit_entry(patient):
 
 
 def remove_entry(patient, silent: bool = False):
+    """
+    Remove entry for a patient from the database by id or name.
+    """
     if patient.id:
         delete_column = "id"  # The column used to find the specific row
         delete_value = patient.id  # The value to match for deletion
@@ -321,6 +333,7 @@ def remove_entry(patient, silent: bool = False):
 
     if not silent:
         print("Patient removed")
+
 
 if __name__ == "__main__":
     main()
