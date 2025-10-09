@@ -36,7 +36,7 @@ Upon starting the program the user is prompted for input. The user can:
 * "patient.py -w" to add a new patient to the database.
 
 #### Operation
-The program operates by creating a patient object using the Patient class which contains the species, gender, name and age of the pet. Then depending on the context the object can be written to the database or be edited the as a class instance by user prompts.
+The program operates by creating a patient object using the Patient class which contains the species, gender, name and age of the pet. Then depending on the context the object can be written to the database or be edited as a class instance by user prompts.
 
 #### Components
 
